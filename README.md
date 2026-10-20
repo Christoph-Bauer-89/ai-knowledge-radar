@@ -27,10 +27,10 @@ Das System setzt auf einen schlanken, performanten und vollständig lokal kontro
 Die Pipeline arbeitet im Hintergrund und folgt einem modularen 4-Schichten-Modell:
 
 ### Schritt A: Multi-Channel Ingestion Hub
-* **RSS-Feeds:** Sechs handverlesene, ausgewogene Top-Quellen decken sowohl aktuelle Branchen-News als auch tiefe technische Deep-Dives ab (*The Batch*, *Simon Willison*, *Hugging Face*, *Ahead of AI*, *OpenAI News*, *Lilian Weng*).
-* **Telegram-Listener:** Ein permanent im Hintergrund laufender Bot (`telegram_listener.py`) nimmt geteilte Links oder Dokumente mobil entgegen und füttert das System.
+- **RSS-Feeds:** Sechs handverlesene, ausgewogene Top-Quellen decken sowohl aktuelle Branchen-News als auch tiefe technische Deep-Dives ab (*The Batch*, *Simon Willison*, *Hugging Face*, *Ahead of AI*, *OpenAI News*, *Lilian Weng*).
+- **Telegram-Listener:** Ein permanent im Hintergrund laufender Bot (`telegram_listener.py`) nimmt geteilte Links oder Dokumente mobil entgegen und füttert das System.
 
-![RSS Script Execution Log](rss-script-execution-log.png)[cite: 10]
+![RSS Script Execution Log](rss-script-execution-log.png)
 
 ### Schritt B: Globaler Duplikats-Schutz (Der Türsteher)
 Ein zentrales `processed_links.json`-Register speichert jede erfolgreich verarbeitete URL. Dies verhindert Endlosschleifen und sorgt dafür, dass Artikel niemals doppelt eingelesen werden.
@@ -38,30 +38,30 @@ Ein zentrales `processed_links.json`-Register speichert jede erfolgreich verarbe
 ### Schritt C: KI-Synthese & Smart Routing (Das Gehirn)
 `GPT-4o-mini` analysiert den Volltext und generiert eine strukturierte Markdown-Notiz mit folgenden Sektionen:
 1. Prägnanter deutscher Titel
-2. 📌 **Executive Summary** (Zusammenfassung in 2-3 Sätzen)[cite: 11]
-3. 💡 **Key Insights** (Die wichtigsten Kernpunkte als Bullet Points)[cite: 11]
-4. 🔬 **Fachbegriffe & Definitionen** (Verständliche Erklärungen für Einsteiger)[cite: 11]
+2. 📌 **Executive Summary** (Zusammenfassung in 2-3 Sätzen)
+3. 💡 **Key Insights** (Die wichtigsten Kernpunkte als Bullet Points)
+4. 🔬 **Fachbegriffe & Definitionen** (Verständliche Erklärungen für Einsteiger)
 
-![Obsidian Generated Note Preview](obsidian-generated-note-preview.png)[cite: 11]
+![Obsidian Generated Note Preview](obsidian-generated-note-preview.png)
 
 **Smart Routing:** Die KI klassifiziert den Inhalt am Ende des Prompts automatisch in zwei Kategorien:
-* `KATEGORIE: NEWS` $\rightarrow$ Zielordner: `KI_Knowledge_Base/02_News_Events`
-* `KATEGORIE: EVERGREEN` $\rightarrow$ Zielordner: `KI_Knowledge_Base/01_Evergreen_Knowledge`
+- `KATEGORIE: NEWS` $\rightarrow$ Zielordner: `KI_Knowledge_Base/02_News_Events`
+- `KATEGORIE: EVERGREEN` $\rightarrow$ Zielordner: `KI_Knowledge_Base/01_Evergreen_Knowledge`
 
 ### Schritt D: Evergreen-Deduplizierung & Ablage
 Handelt es sich um einen Evergreen-Artikel, prüft ein maßgeschneiderter String-Ähnlichkeits-Abgleich (via Python `difflib`), ob im entsprechenden Ordner bereits eine thematisch identische Notiz existiert (Schwellenwert-Prüfung). Bei einem Treffer wird die Erstellung abgefangen, um Redundanzen im Wissensnetz zu verhindern. Andernfalls wird die Datei mit sauberem YAML-Frontmatter im Zielverzeichnis gespeichert.
 
-![Obsidian Vault Structure](obsidian-vault-structure.png)[cite: 9]
+![Obsidian Vault Structure](obsidian-vault-structure.png)
 
 ---
 
 ## 🚨 Key Challenges & Lösungen
 
-* **Herausforderung 1: Informationsüberflutung & Fachchinesisch**
+- **Herausforderung 1: Informationsüberflutung & Fachchinesisch**
   * *Lösung:* Ein speziell optimierter System-Prompt, der technische Fachartikel so aufbereitet, dass Kernkonzepte auch für Einsteiger greifbar und direkt anwendbar werden.
-* **Herausforderung 2: Unstrukturierte Inboxes & Vermischung von News und Konzepten**
+- **Herausforderung 2: Unstrukturierte Inboxes & Vermischung von News und Konzepten**
   * *Lösung:* Implementierung des Smart Routings. Flüchtige Release-Meldungen landen getrennt von zeitlosem Grundlagenwissen in dedizierten Ordnern.
-* **Herausforderung 3: Redundante Wissensartikel im Second Brain**
+- **Herausforderung 3: Redundante Wissensartikel im Second Brain**
   * *Lösung:* Ein automatisierter Titel- und Inhaltsabgleich vor dem Speichern von Evergreen-Notizen, der das System langfristig schlank, übersichtlich und frei von Dubletten hält.
 
 ---
@@ -75,12 +75,12 @@ Das Projekt beweist, wie sich moderne LLM-APIs, Web-Scraping und lokale Dateisys
 ## 📂 Repository-Struktur
 
 ```text
-├── 🐍 rss_to_obsidian.py          # Haupt-Pipeline für RSS-Ingestion & Smart Routing[cite: 10]
+├── 🐍 rss_to_obsidian.py          # Haupt-Pipeline für RSS-Ingestion & Smart Routing
 ├── 🐍 telegram_listener.py        # Hintergrund-Bot für mobile Link-Erfassung
 ├── 📄 processed_links.json        # Zentrales Register zur Duplikatsvermeidung
 ├── 📁 00_Inbox/                   # Temporärer Eingangskanal
 ├── 📁 01_Evergreen_Knowledge/     # Zeitlose Grundlagen & Deep Dives
 ├── 📁 02_News_Events/             # Aktuelle Branchen-Meldungen & Releases
-├── 🖼️ rss-script-execution-log.png  # Terminal-Ausführungsprotokoll[cite: 10]
-├── 🖼️ obsidian-generated-note-preview.png # Generierte Markdown-Struktur[cite: 11]
-└── 🖼️ obsidian-vault-structure.png        # Vault-Ordner- & Notizansicht[cite: 9]
+├── 🖼️ rss-script-execution-log.png  # Terminal-Ausführungsprotokoll
+├── 🖼️ obsidian-generated-note-preview.png # Generierte Markdown-Struktur
+└── 🖼️ obsidian-vault-structure.png        # Vault-Ordner- & Notizansicht
