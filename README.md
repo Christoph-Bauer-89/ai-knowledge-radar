@@ -8,9 +8,9 @@ Ein vollautonomes, produktionsreifes Knowledge-Management-System in Obsidian zur
 
 Das Ziel dieses Projekts war die Entwicklung eines vollautonomen, produktionsreifen Knowledge-Management-Systems direkt in Obsidian. Statt sich in der täglichen Informationsflut von KI-News zu verlieren, sollte ein zentraler, intelligenter „Ingest-Hub“ entstehen. Dieser sammelt Rohdaten aus handverlesenen RSS-Feeds, Telegram-Chats und PDFs, extrahiert die Volltexte, lässt sich durch `gpt-4o-mini` aufbereiten, sortiert sie intelligent vor (Smart Routing) und schützt das System aktiv vor Redundanzen. 
 
-> **Hinweis zur Entwicklung:** Dieses Projekt wurde pragmatisch, zielorientiert und effizient umgesetzt – mit dem Fokus auf funktionierende Automatisierung, saubere API-Integration und direkten Nutzwert für das eigene Wissensmanagement, ohne unnötigen Code-Ballast.
+> **Transparenzhinweis & Entwicklungsansatz:** Dieses System wurde nach dem „AI-First-Builder“-Prinzip konzipiert und umgesetzt. Als Architekt des Workflows lag der Fokus auf der Konzeption des Datenflusses, der Systemlogik (Smart Routing, Deduplizierung) und der nahtlosen Integration von APIs und lokalen Dateisystemen. Der Einsatz moderner KI-Assistenten diente dabei als hocheffizienter Entwicklungshebel – ein Beweis dafür, wie man komplexe Automatisierungen pragmatisch, schnell und mit klarem Blick für den echten Nutzwert realisiert.
 
-*Hinweis zum Datenschutz & Setup:* Alle persönlichen API-Keys und lokalen Systempfade wurden im Code bereinigt und durch Platzhalter ersetzt. Die Historien-Datei (`processed_links.json`) wird standardmäßig als leere Liste im Repository bereitgestellt, um einen sauberen Start zu garantieren.
+*Hinweis zum Setup:* Alle persönlichen API-Keys und lokalen Systempfade wurden im Code bereinigt und durch Platzhalter ersetzt. Die Historien-Datei (`processed_links.json`) wird standardmäßig als leere Liste im Repository bereitgestellt, um einen sauberen Start zu garantieren.
 
 ---
 
