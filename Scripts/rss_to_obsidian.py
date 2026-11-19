@@ -30,7 +30,7 @@ RSS_FEEDS = [
 ]
 
 # Pfade & Ordnerstruktur
-BASE_DIR = r"C:\Users\chris\Documents\AI Überblick\Obsidian"
+BASE_DIR = r"./Obsidian_Vault_Example"  # Pfad zum eigenen Obsidian-Vault eintragen
 DIR_NEWS = os.path.join(BASE_DIR, "KI_Knowledge_Base", "02_News_Events")
 DIR_EVERGREEN = os.path.join(BASE_DIR, "KI_Knowledge_Base", "01_Evergreen_Knowledge")
 HISTORY_FILE = os.path.join(BASE_DIR, "processed_links.json")
